@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BuildByAreeb</title>
+
+  <!-- GOOGLE FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- AOS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+
+  <!-- THREE JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <!-- PARTICLES -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+<div id="loader">
+
+  <div class="loader-text">
+    BuildByAreeb
+  </div>
+
+</div>
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#050816;
+      color:white;
+      overflow-x:hidden;
+      transition:0.5s;
+    }
+
+    body.light{
+      background:white;
+      color:black;
+    }
+
+    /* CUSTOM CURSOR */
+
+    .cursor{
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      background:#00f5ff;
+      position:fixed;
+      pointer-events:none;
+      transform:translate(-50%,-50%);
+      mix-blend-mode:screen;
+      z-index:9999;
+      box-shadow:0 0 25px #00f5ff;
+    }
+
+    /* PARTICLES */
+
+    #particles-js{
+      position:fixed;
+      width:100%;
+      height:100%;
+      z-index:-1;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      padding:20px 10%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+
+      backdrop-filter:blur(20px);
+      background:rgba(255,255,255,0.05);
+      border-bottom:1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo{
+      font-size:32px;
+      font-weight:700;
+      color:#00f5ff;
+    }
+
+    nav ul{
+      display:flex;
+      gap:30px;
+      list-style:none;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+    }
+
+    nav a:hover{
+      color:#00f5ff;
+    }
+
+    body.light nav a{
+      color:black;
+    }
+
+    #themeToggle{
+      padding:10px 20px;
+      border:none;
+      border-radius:30px;
+      background:#00f5ff;
+      cursor:pointer;
+      font-weight:bold;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:0 10%;
+      position:relative;
+    }
+
+    .hero-content{
+      max-width:600px;
+      z-index:2;
+    }
+
+    .hero h1{
+      font-size:90px;
+      line-height:1.1;
+
+      background:linear-gradient(90deg,#00f5ff,#7a5cff);
+      -webkit-background-clip:text;
+      color:transparent;
+
+      animation:glow 2s infinite alternate;
+    }
+
+    @keyframes glow{
+
+      from{
+        text-shadow:0 0 10px #00f5ff;
+      }
+
+      to{
+        text-shadow:0 0 30px #7a5cff;
+      }
+
+    }
+
+    .hero p{
+      margin-top:20px;
+      font-size:22px;
+      opacity:0.8;
+    }
+
+    .hero button{
+      margin-top:30px;
+      padding:15px 40px;
+      border:none;
+      border-radius:40px;
+      background:#00f5ff;
+      color:black;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.4s;
+    }
+
+    .hero button:hover{
+      transform:scale(1.1);
+      box-shadow:0 0 25px #00f5ff;
+    }
+
+    /* TYPING */
+
+    #typing{
+      margin-top:20px;
+      color:#00f5ff;
+      font-size:28px;
+    }
+
+    /* GLOBE */
+
+    #globe{
+      width:500px;
+      height:500px;
+    }
+
+    /* SERVICES */
+
+    .services{
+      padding:120px 10%;
+    }
+
+    .services h2{
+      font-size:60px;
+      margin-bottom:60px;
+      text-align:center;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      padding:40px;
+      border-radius:25px;
+
+      backdrop-filter:blur(20px);
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+
+      transition:0.5s;
+    }
+
+    .card:hover{
+      transform:
+      rotateY(10deg)
+      rotateX(10deg)
+      translateY(-10px);
+
+      box-shadow:0 0 30px #00f5ff44;
+    }
+
+    .card h3{
+      margin-bottom:15px;
+      color:#00f5ff;
+    }
+
+    /* COUNTER */
+
+    .counter-section{
+      padding:100px 10%;
+      display:flex;
+      justify-content:space-around;
+      text-align:center;
+      flex-wrap:wrap;
+      gap:30px;
+    }
+
+    .counter h2{
+      font-size:60px;
+      color:#00f5ff;
+    }
+
+    .counter p{
+      margin-top:10px;
+    }
+
+    /* PORTFOLIO */
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+
+  <h2 data-aos="fade-up">
+    My Journey
+  </h2>
+
+  <div class="portfolio-grid">
+
+    <!-- FREELANCE -->
+
+    <div class="project" data-aos="flip-left">
+
+      <div>
+
+        <h3>💸 Freelance Projects</h3>
+
+        <p>
+          Earned $5000+ from freelance website
+          development & digital projects.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- STARTUPS -->
+
+    <div class="project" data-aos="flip-left">
+
+      <div>
+
+        <h3>🚀 Multiple Startups</h3>
+
+        <p>
+          Working on multiple startup ideas
+          including AI tools, agency projects,
+          and digital platforms.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- HACKATHONS -->
+
+    <div class="project" data-aos="flip-left">
+
+      <div>
+
+        <h3>🏆 Hackathons</h3>
+
+        <p>
+          Participating in hackathons to build
+          innovative AI products and improve
+          problem-solving skills.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- INTERNSHIPS -->
+
+    <div class="project" data-aos="flip-left">
+
+      <div>
+
+        <h3>💼 Internships</h3>
+
+        <p>
+          Exploring internships and gaining
+          real-world experience in technology,
+          startups, and development.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="social-dock">
+
+  <a href="#">📸</a>
+  <a href="#">💼</a>
+  <a href="#">💬</a>
+
+</div>
+
+    <!-- BUILD BY AREEB -->
+
+    <div class="project" data-aos="flip-left">
+
+      <div>
+
+        <h3>🌐 BuildByAreeb</h3>
+
+        <p>
+          Building futuristic AI websites,
+          premium startup interfaces, and
+          digital experiences for clients.
+        </p>
+
+      </div>
+
+    </div>
+
+    <!-- FUTURE -->
+
+    <div class="project" data-aos="flip-left">
+
+      <div>
+
+        <h3>🔥 Future Goals</h3>
+
+        <p>
+          Growing BuildByAreeb into a premium
+          global AI startup & creative agency.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+    
+
+    /* TESTIMONIAL */
+
+    .testimonials{
+      padding:120px 10%;
+      text-align:center;
+    }
+
+    .testimonial-card{
+      max-width:700px;
+      margin:auto;
+      padding:40px;
+      border-radius:25px;
+
+      backdrop-filter:blur(20px);
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.1);
+    }
+
+    /* FOOTER */
+
+    footer{
+      padding:50px 10%;
+      text-align:center;
+      opacity:0.7;
+    }
+
+    /* MOBILE */
+
+    @media(max-width:900px){
+
+      nav ul{
+        display:none;
+      }
+
+      .hero{
+        flex-direction:column;
+        justify-content:center;
+        text-align:center;
+        padding-top:120px;
+      }
+
+      .hero h1{
+        font-size:60px;
+      }
+
+      #globe{
+        width:300px;
+        height:300px;
+      }
+
+      .services h2,
+      .portfolio h2{
+        font-size:40px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- CURSOR -->
+  <div class="cursor"></div>
+
+  <!-- PARTICLES -->
+  <div id="particles-js"></div>
+
+  <!-- NAVBAR -->
+  <nav>
+
+    <div class="logo">BuildByAreeb</div>
+
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <button id="themeToggle">🌙</button>
+
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+
+    <div class="hero-content" data-aos="fade-right">
+
+      <h1>Future Of AI Websites</h1>
+
+      <p>
+        Premium startup websites & AI experiences.
+      </p>
+
+      <h2 id="typing"></h2>
+
+      <button>Get Started</button>
+
+    </div>
+
+    <canvas id="globe"></canvas>
+
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+
+    <h2 data-aos="fade-up">Our Services</h2>
+
+    <div class="cards">
+
+      <div class="card" data-aos="zoom-in">
+        <h3>AI Websites</h3>
+        <p>Modern futuristic websites with animations.</p>
+      </div>
+
+      <div class="card" data-aos="zoom-in">
+        <h3>App Development</h3>
+        <p>Android & web applications for startups.</p>
+      </div>
+
+      <div class="card" data-aos="zoom-in">
+        <h3>UI/UX Design</h3>
+        <p>Premium Apple/Tesla style interfaces.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- COUNTERS -->
+  <section class="counter-section">
+
+    <div class="counter">
+      <h2 class="count" data-target="100">0</h2>
+      <p>Clients</p>
+    </div>
+
+    <div class="counter">
+      <h2 class="count" data-target="250">0</h2>
+      <p>Projects</p>
+    </div>
+
+    <div class="counter">
+      <h2 class="count" data-target="24">0</h2>
+      <p>Support</p>
+    </div>
+
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+
+    <h2 data-aos="fade-up">Portfolio</h2>
+
+    <div class="portfolio-grid">
+
+      <div class="project" data-aos="flip-left">
+        AI Website
+      </div>
+
+      <div class="project" data-aos="flip-left">
+        Startup App
+      </div>
+
+      <div class="project" data-aos="flip-left">
+        Dashboard UI
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonials">
+
+    <h2 data-aos="fade-up">Testimonials</h2>
+
+    <div class="testimonial-card" data-aos="zoom-in">
+
+      <p>
+        “BuildByAreeb created an amazing futuristic website for our startup.”
+      </p>
+
+      <br>
+
+      <h3>- Client</h3>
+
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+
+    © 2026 BuildByAreeb — All Rights Reserved
+
+  </footer>
+
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+
+    // AOS
+
+    AOS.init({
+      duration:1000
+    });
+
+    // DARK MODE
+
+    const themeToggle =
+    document.getElementById("themeToggle");
+
+    themeToggle.onclick = () => {
+      document.body.classList.toggle("light");
+    };
+
+    // PARTICLES
+
+    tsParticles.load("particles-js", {
+
+      particles: {
+
+        number:{
+          value:100
+        },
+
+        color:{
+          value:"#00f5ff"
+        },
+
+        links:{
+          enable:true,
+          color:"#00f5ff"
+        },
+
+        move:{
+          enable:true,
+          speed:2
+        }
+
+      }
+
+    });
+
+    // TYPING EFFECT
+
+    const text =
+    "We Build Future.";
+
+    let i = 0;
+
+    function typing(){
+
+      if(i < text.length){
+
+        document.getElementById("typing")
+        .innerHTML += text.charAt(i);
+
+        i++;
+
+        setTimeout(typing,100);
+
+      }
+
+    }
+
+    typing();
+
+    // COUNTER
+
+    const counters =
+    document.querySelectorAll(".count");
+
+    counters.forEach(counter => {
+
+      counter.innerText = "0";
+
+      const updateCounter = () => {
+
+        const target =
+        +counter.getAttribute("data-target");
+
+        const c =
+        +counter.innerText;
+
+        const increment =
+        target / 100;
+
+        if(c < target){
+
+          counter.innerText =
+          `${Math.ceil(c + increment)}`;
+
+          setTimeout(updateCounter,30);
+
+        }else{
+
+          counter.innerText = target;
+
+        }
+
+      };
+
+      updateCounter();
+
+    });
+
+    // CUSTOM CURSOR
+
+    const cursor =
+    document.querySelector(".cursor");
+
+    document.addEventListener("mousemove",e => {
+
+      cursor.style.left =
+      e.clientX + "px";
+
+      cursor.style.top =
+      e.clientY + "px";
+
+    });
+
+    // 3D GLOBE
+
+    const scene =
+    new THREE.Scene();
+
+    const camera =
+    new THREE.PerspectiveCamera(
+      75,
+      1,
+      0.1,
+      1000
+    );
+
+    const renderer =
+    new THREE.WebGLRenderer({
+      canvas:document.getElementById("globe"),
+      alpha:true
+    });
+
+    renderer.setSize(500,500);
+
+    const geometry =
+    new THREE.SphereGeometry(2,64,64);
+
+    const material =
+    new THREE.MeshBasicMaterial({
+      color:0x00f5ff,
+      wireframe:true
+    });
+
+    const sphere =
+    new THREE.Mesh(
+      geometry,
+      material
+    );
+
+    scene.add(sphere);
+
+    camera.position.z = 5;
+
+    function animate(){
+
+      requestAnimationFrame(animate);
+
+      sphere.rotation.y += 0.01;
+
+      renderer.render(scene,camera);
+
+    }
+
+    animate();
+
+  </script>
+
+</body>
+</html>
+
+<!-- SOCIAL CONNECT SECTION -->
+
+<section class="connect-section" id="contact">
+
+  <h2 data-aos="fade-up">
+    Connect With Me
+  </h2>
+
+  <p class="connect-text" data-aos="fade-up">
+    Let's build futuristic AI startups, websites,
+    apps & digital experiences together 🚀
+  </p>
+
+  <div class="social-container">
+
+    <!-- WHATSAPP -->
+
+    <a
+      href="https://wa.me/91 7752815714"
+      target="_blank"
+      class="social-card whatsapp"
+      data-aos="zoom-in"
+    >
+
+      <div class="icon">💬</div>
+
+      <h3>WhatsApp</h3>
+
+      <p>Chat directly with me</p>
+
+    </a>
+
+    <!-- INSTAGRAM -->
+
+    <a
+      href="https://instagram.com/build_byareeb"
+      target="_blank"
+      class="social-card instagram"
+      data-aos="zoom-in"
+    >
+
+      <div class="icon">📸</div>
+
+      <h3>Instagram</h3>
+
+      <p>Follow my journey</p>
+
+    </a>
+
+    <!-- LINKEDIN -->
+
+    <a
+      href="https://linkedin.com/in/mohdareeb99"
+      target="_blank"
+      class="social-card linkedin"
+      data-aos="zoom-in"
+    >
+
+      <div class="icon">💼</div>
+
+      <h3>LinkedIn</h3>
+
+      <p>Connect professionally</p>
+
+    </a>
+
+  </div>
+
+</section>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
